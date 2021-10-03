@@ -1,0 +1,56 @@
+﻿@model S2021A6CXY.Models.TrackWithDetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+    var userAccount = new S2021A6CXY.Controllers.RequestUser(User as System.Security.Claims.ClaimsPrincipal);
+}
+
+<h2>Track details</h2>
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr />
+        </dd>
+        <dt>
+            Sample Clip
+        </dt>
+        <dd>
+            <audio src="/clip/@Model.Id" controls="controls"></audio>
+            <hr />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Composers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Composers)
+            <hr />
+        </dd>
+        @*
+        <dt>
+            @Html.DisplayNameFor(model => model.AlbumsCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AlbumsCount)
+            <hr />
+        </dd*@
+
+    </dl>
+</div>
+<p>
+    @if (userAccount.HasRoleClaim("Clerk"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) 
+        @Html.Raw(" | ");
+     }
+        @Html.ActionLink("Back to List", "Index")
+</p>
